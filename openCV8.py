@@ -15,6 +15,8 @@ print(result)
 fource = cv2.VideoWriter_fourcc(*'DIVX')
 
 cap = cv2.VideoCapture('cap.mp4')
+
+
 while True:
     ret, frame = cap.read()
     

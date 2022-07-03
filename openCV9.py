@@ -1,23 +1,30 @@
 import cv2
 
-fource = cv2.VideoWriter_fourcc(*'DIVX')
+#비디오 형식
+fourcc = cv2.VideoWriter_fourcc(*'DIVX')
 
 cap = cv2.VideoCapture('cat.mp4')
 
+width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+#재생속도
+fps = int(cap.get(cv2.CAP_PROP_FPS))
+
+#저장 파일명
+out = cv2.VideoWriter('output.mp4',fourcc,fps,(width, height))
 
 while(True):
     ret, frame = cap.read()
     if not ret :
-        print("프레임 다 가져옴")
         break
+    
+    out.write(frame)
     cv2.imshow('video', frame)
     
-    #waitkey로 속도 조절
-    #ord 키보드키
-    if cv2.waitKey(25)==ord('q') :
-        print("사용자에 의해 종료")
+    if cv2.waitKey(1)==ord('q') :
         break
-
+    
+out.release() #자원해제
 cap.release()
 cv2.destroyAllWindows()
 
