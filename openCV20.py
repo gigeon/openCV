@@ -28,18 +28,16 @@ def mouse_handler(event, x, y, flags, param):
     if drawing :
         prev_point = None #t시작점
         for p in point :
-            cv2.line(img,p, 15, color, cv2.FILLED )
+            cv2.circle(img,p, 15, color, cv2.FILLED )
             if prev_point :
                 cv2.line(img, prev_point, point, color, thickness, cv2.LINE_AA)
         prev_point = point
         
     if len(point) == 4 :
         show_result()   
-    
-    cv2.imshow('img',img)
 
 cv2.namedWindow('img')
 cv2.setMouseCallback('img', mouse_handler)
-cv2.imshow('img',img)
+cv2.imshow('img', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
